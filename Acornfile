@@ -1,0 +1,27 @@
+containers: {
+  heimdall: {
+    env: {
+      "TZ": "Asia/Kolkata"
+      "PUID": "1000"
+      "PGID": "1000"
+    }
+    image: "lscr.io/linuxserver/heimdall:latest"
+    ports: {
+      publish: [
+        "8081:80/http",
+        "9443:443/http"
+      ]
+    }
+    dirs: {
+      "/config": "volume://heimdall-pv-nfs-config"
+    }
+  }
+}
+
+volumes: {
+  "heimdall-pv-nfs-config": {
+    size: 1G
+    class: "nfs-heimdall-conf"
+    accessModes: "readWriteMany"
+  }
+}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: heimdall-pv-nfs-conf
+spec:
+  storageClassName: "nfs-heimdall-conf"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany 
+  persistentVolumeReclaimPolicy: Retain 
+  nfs:
+    path: HEIMDALL_CONF_NFS_PATH        # < NFS share path on the server
+    server: NFS_SERVER_IP               # < IP address of your NFS server
+    readOnly: false
